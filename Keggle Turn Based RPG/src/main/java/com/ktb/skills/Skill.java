@@ -1,10 +1,10 @@
-package ktb.skills;
+package main.java.com.ktb.skills;
 /**
  * This class is the base class of all skills.
  * A skill is an ability that a character can use.
  * @author Tim
  *
- */
+ */ 
 public class Skill {
 	private String name = "";
 	private String tooltipp = "";

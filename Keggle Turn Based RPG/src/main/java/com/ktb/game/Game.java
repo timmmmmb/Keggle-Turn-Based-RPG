@@ -1,8 +1,9 @@
-package ktb.game;
+package main.java.com.ktb.game;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -12,8 +13,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import ktb.character.Keggle;
-
+import main.java.com.ktb.character.Keggle;
+ 
 public class Game {
 	private java.util.Timer timer;
 	private boolean isRunning;
@@ -29,14 +30,14 @@ public class Game {
         emptyLabel.setPreferredSize(new Dimension(1200, 600));
 		frame.getContentPane().add(emptyLabel, BorderLayout.CENTER);
 		frame.pack();
-		
+		ClassLoader classLoader = new Game().getClass().getClassLoader();
 		Game game = new Game();
-		ArrayList<ktb.character.Character> characters = new ArrayList<>();
+		ArrayList<main.java.com.ktb.character.Character> characters = new ArrayList<>();
 		Keggle player = new Keggle();
 		characters.add(player);
-		for(ktb.character.Character character:characters) {
+		for(main.java.com.ktb.character.Character character:characters) {
 			try {
-				BufferedImage image = ImageIO.read(character.getImage());
+				BufferedImage image = ImageIO.read(new File(classLoader.getResource(character.getImage()).getFile().toString().replaceAll("%20", " ")));
 				JLabel picLabel = new JLabel(new ImageIcon(image));
 				frame.add(picLabel);
 			} catch (IOException e) {

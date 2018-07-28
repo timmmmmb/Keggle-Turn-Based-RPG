@@ -1,7 +1,8 @@
-package ktb.character;
+package main.java.com.ktb.character;
 
 public class Keggle extends Character {
 	public Keggle() {
 		this.setName("keggle") ;
 	}
 }
+ 

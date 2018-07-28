@@ -1,6 +1,4 @@
-package ktb.character;
-
-import java.io.File;
+package main.java.com.ktb.character;
 
 /**
  * This class is the base class of all characters. 
@@ -13,8 +11,8 @@ public class Character {
 	private String name = "";
 	private boolean playablecharacter = false;
 	private boolean activecharacter = false;
-	private int health = 0;
-	private File imagefile = new File("D:\\Projects\\Keggle Turn Based RPG\\trunk\\Keggle Turn Based RPG\\src\\ktb\\character\\images\\keggle.png");
+	private int health = 0; 
+	private String imagefile = "images/keggle.png";
 
 	
 	public void setName(String pname) {
@@ -49,11 +47,11 @@ public class Character {
 		return this.activecharacter;
 	}
 	
-	public File getImage() {
+	public String getImage() {
 		return imagefile;
 	}
 	
-	public void setImage(File pimagefile) {
+	public void setImage(String pimagefile) {
 		imagefile = pimagefile;
 	}
 	
