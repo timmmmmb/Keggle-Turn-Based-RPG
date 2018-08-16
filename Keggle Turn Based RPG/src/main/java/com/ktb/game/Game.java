@@ -5,7 +5,7 @@ import java.util.Timer;
 
 
 import javax.swing.JFrame;
-
+import javax.swing.JPanel;
 
 import main.java.com.ktb.character.Keggle;
  
@@ -13,13 +13,16 @@ public class Game {
 	private java.util.Timer timer;
 	private boolean isRunning = true;
 	private JFrame frame = new JFrame("KTB");
+	private final JPanel panel = new JPanel();
 	private ArrayList<main.java.com.ktb.character.Character> characters = new ArrayList<>();
 	/**
 	 * This class starts the game and displays the images.
 	 * @param args
 	 */
 	public Game() {
-		
+		panel.setLayout(null);
+	    frame.setContentPane(panel);
+	    
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1200,600);
         
@@ -31,8 +34,15 @@ public class Game {
 	}
 	
 	private void loadCharacterImages() {
-		for(main.java.com.ktb.character.Character character:characters) {				
-			frame.add(character.getImage());
+		for(main.java.com.ktb.character.Character character:characters) {
+			//add the character image
+			panel.add(character.getImage());
+			//add the characters health and manabar
+			panel.add(character.getManaBarImage());
+			panel.add(character.getManaImage());
+			panel.validate();
+	        frame.repaint();
+	        frame.setVisible(true);
 		}
 	}
 	
@@ -57,8 +67,9 @@ public class Game {
 			}
 	    	
 	    	//render the game
-	    	frame.setVisible(true);
-	    	
+	    	panel.validate();
+	        frame.repaint();
+	        frame.setVisible(true);
 	        if (!isRunning)
 	        {
 	            timer.cancel();
