@@ -21,15 +21,14 @@ public class Character {
 	private boolean activecharacter = false;
 	private int health = 0; 
 	private String imagefile = "images/keggle.png";
-	private JLabel picLabel = null;
-	private Manabar mana = new Manabar(10);
+	protected JLabel picLabel = null;
 	final int width = 16;
 	final int height = 28;
 	final int rows = 3;
 	final int cols = 1;
 	private int currentsprite = 0;
-	private int posx = 42;
-	private int posy = 10;
+	protected int posx = 42;
+	protected int posy = 10;
 	protected ClassLoader classLoader = null;
 	private BufferedImage[] sprites = new BufferedImage[rows * cols];
 	
@@ -91,13 +90,6 @@ public class Character {
 		return picLabel;
 	}
 	
-	public JLabel getManaImage() {
-		return mana.getManaLabel();
-	}
-	
-	public JLabel getManaBarImage() {
-		return mana.getManaBarLabel();
-	}
 	
 	public void setImage(String pimagefile) {
 		imagefile = pimagefile;
@@ -114,5 +106,11 @@ public class Character {
 		}
 		
 		picLabel.setIcon(new ImageIcon(sprites[currentsprite]));
+	}
+	
+	public void setPosition(int x, int y) {
+		posx = x;
+		posy = y;
+		picLabel.setBounds(posx, posy, picLabel.getPreferredSize().width, picLabel.getPreferredSize().height);
 	}
 }

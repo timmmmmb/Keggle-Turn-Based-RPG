@@ -16,12 +16,13 @@ public class Manabar {
 	private JLabel manabarlabel = null;
 	private JLabel manalabel = null;
 	protected ClassLoader classLoader = null;
+	private BufferedImage manaimg = null;
+	private BufferedImage manabarimg = null;
 	public Manabar( int pmaxmana) {
 		this.classLoader =this.getClass().getClassLoader();
-		BufferedImage manaimg = null;
-		BufferedImage manabarimg = null;
+		
 		try {
-		manabarimg = ImageIO.read(new File(classLoader.getResource("images/bar.png").getFile().toString().replaceAll("%20", " ")));
+			manabarimg = ImageIO.read(new File(classLoader.getResource("images/bar.png").getFile().toString().replaceAll("%20", " ")));
 			manaimg = ImageIO.read(new File(classLoader.getResource("images/mana.png").getFile().toString().replaceAll("%20", " ")));
 		} catch (IOException e) {
 			System.out.println(e);
@@ -48,10 +49,12 @@ public class Manabar {
 		}else{
 			mana = maxmana;
 		}
-	}
+		manalabel.setSize(manaimg.getWidth()/maxmana*mana, manaimg.getHeight());
+	}	
 	
 	public void usemana(int cost) {
 		mana = mana - cost;
+		manalabel.setSize(manaimg.getWidth()/maxmana*mana, manaimg.getHeight());
 	}
 	
 	public int getMana() {
