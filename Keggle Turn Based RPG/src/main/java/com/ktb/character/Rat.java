@@ -1,12 +1,12 @@
 package main.java.com.ktb.character;
 
-public class Keggle extends Character {
-	public Keggle() {
+public class Rat extends Character {
+	public Rat() {
 		this.classLoader =this.getClass().getClassLoader();
 		this.initializeLabel();
-		this.setPlayablecharacter(true);
-		this.setName("Keggle") ;
-		this.setPosition(100, 50);
+		this.setPlayablecharacter(false);
+		this.setName("Rat") ;
+		this.setPosition(500, 50);
 	}
 	
 	public void setPosition(int x, int y) {

@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import main.java.com.ktb.character.Keggle;
+import main.java.com.ktb.character.Rat;
  
 public class Game {
 	private java.util.Timer timer;
@@ -38,13 +39,12 @@ public class Game {
 			//add the character image
 			panel.add(character.getImage());
 			//add the characters health 
-			
+			panel.add((character).getHealthBarImage());
+			panel.add((character).getHealthImage());
 			//add the characters manabar if its a playable character
-			if(character.getPlayablecharacter()) {
-				panel.add((character).getHealthBarImage());
-				panel.add((character).getHealthImage());	
-				panel.add(((Keggle)character).getManaBarImage());
-				panel.add(((Keggle)character).getManaImage());	
+			if(character.getPlayablecharacter()) {	
+				panel.add((character).getManaBarImage());
+				panel.add((character).getManaImage());	
 			}
 			
 			panel.validate();
@@ -56,6 +56,8 @@ public class Game {
 	private void addCharacters() {
 		Keggle player = new Keggle();
 		characters.add(player);
+		Rat rat = new Rat();
+		characters.add(rat);
 	}
 	
 	private void gameLoop()
