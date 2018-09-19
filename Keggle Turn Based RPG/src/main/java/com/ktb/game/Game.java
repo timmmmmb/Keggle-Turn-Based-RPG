@@ -41,6 +41,8 @@ public class Game {
 			
 			//add the characters manabar if its a playable character
 			if(character.getPlayablecharacter()) {
+				panel.add((character).getHealthBarImage());
+				panel.add((character).getHealthImage());	
 				panel.add(((Keggle)character).getManaBarImage());
 				panel.add(((Keggle)character).getManaImage());	
 			}
@@ -69,13 +71,13 @@ public class Game {
 	        //do game updates
 	    	for(main.java.com.ktb.character.Character character:characters) {				
 				character.animate();
-				if(character.getPlayablecharacter()) {
+				/*if(character.getPlayablecharacter()) {
 					if(((Keggle) character).getMana()<1) {
 						((Keggle) character).regenerateMana(1);
 			    	}else {
 			    		((Keggle) character).useMana(1);
 			    	}
-				}
+				}*/
 			}
 	    	
 	    	//render the game

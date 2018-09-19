@@ -19,7 +19,7 @@ public class Character {
 	private String name = "";
 	private boolean playablecharacter = false;
 	private boolean activecharacter = false;
-	private int health = 0; 
+	protected Healthbar health = new Healthbar(100); 
 	private String imagefile = "images/keggle.png";
 	protected JLabel picLabel = null;
 	final int width = 16;
@@ -63,11 +63,27 @@ public class Character {
 	}
 	
 	public void setHealth(int phealth) {
-		this.health=phealth;
+		this.health.sethealth(phealth);
 	}
 	
 	public int getHealth() {
-		return this.health;
+		return this.health.gethealth();
+	}
+	
+	public void regenerateHealth(int regenerationrate) {
+		health.regeneratehealth(regenerationrate);
+	}
+	
+	public void useHealth(int cost) {
+		health.losehealth(cost);
+	}
+	
+	public JLabel getHealthImage() {
+		return health.gethealthLabel();
+	}
+	
+	public JLabel getHealthBarImage() {
+		return health.gethealthBarLabel();
 	}
 	
 	public void setPlayablecharacter(boolean pplayablecharacter) {
@@ -112,5 +128,6 @@ public class Character {
 		posx = x;
 		posy = y;
 		picLabel.setBounds(posx, posy, picLabel.getPreferredSize().width, picLabel.getPreferredSize().height);
+		health.setPosition(posx+width/2-health.gethealthBarLabel().getPreferredSize().width/2, posy-health.gethealthBarLabel().getPreferredSize().height+10);
 	}
 }
