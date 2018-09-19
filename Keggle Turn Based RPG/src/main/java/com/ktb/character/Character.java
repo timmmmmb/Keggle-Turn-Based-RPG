@@ -20,6 +20,7 @@ public class Character {
 	private boolean playablecharacter = false;
 	private boolean activecharacter = false;
 	protected Healthbar health = new Healthbar(100); 
+	protected Manabar mana = new Manabar(100);
 	private String imagefile = "images/keggle.png";
 	protected JLabel picLabel = null;
 	final int width = 16;
@@ -84,6 +85,26 @@ public class Character {
 	
 	public JLabel getHealthBarImage() {
 		return health.gethealthBarLabel();
+	}
+	
+	public int getMana(){
+		return mana.getMana();
+	}
+	
+	public void regenerateMana(int regenerationrate) {
+		mana.regeneratemana(regenerationrate);
+	}
+	
+	public void useMana(int cost) {
+		mana.usemana(cost);
+	}
+	
+	public JLabel getManaImage() {
+		return mana.getManaLabel();
+	}
+	
+	public JLabel getManaBarImage() {
+		return mana.getManaBarLabel();
 	}
 	
 	public void setPlayablecharacter(boolean pplayablecharacter) {

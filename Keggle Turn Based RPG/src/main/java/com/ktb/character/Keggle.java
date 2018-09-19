@@ -1,35 +1,12 @@
 package main.java.com.ktb.character;
 
-import javax.swing.JLabel;
-
 public class Keggle extends Character {
-	private Manabar mana = new Manabar(100);
 	public Keggle() {
 		this.classLoader =this.getClass().getClassLoader();
 		this.initializeLabel();
 		this.setPlayablecharacter(true);
 		this.setName("keggle") ;
 		this.setPosition(100, 50);
-	}
-	
-	public int getMana(){
-		return mana.getMana();
-	}
-	
-	public void regenerateMana(int regenerationrate) {
-		mana.regeneratemana(regenerationrate);
-	}
-	
-	public void useMana(int cost) {
-		mana.usemana(cost);
-	}
-	
-	public JLabel getManaImage() {
-		return mana.getManaLabel();
-	}
-	
-	public JLabel getManaBarImage() {
-		return mana.getManaBarLabel();
 	}
 	
 	public void setPosition(int x, int y) {
@@ -39,6 +16,5 @@ public class Keggle extends Character {
 		mana.setPosition(posx+width/2-mana.getManaBarLabel().getPreferredSize().width/2, posy-mana.getManaBarLabel().getPreferredSize().height);
 		health.setPosition(posx+width/2-health.gethealthBarLabel().getPreferredSize().width/2, posy-health.gethealthBarLabel().getPreferredSize().height*2+1);
 	}
-	
 }
  
