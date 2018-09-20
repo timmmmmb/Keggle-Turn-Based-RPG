@@ -1,37 +1,57 @@
 package main.java.com.ktb.game;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 
-
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import main.java.com.ktb.character.Keggle;
 import main.java.com.ktb.character.Rat;
+import main.java.com.ktb.skills.Skill;
  
-public class Game {
+public class Game extends JFrame implements ActionListener{
+
+	private static final long serialVersionUID = 1L;
 	private java.util.Timer timer;
 	private boolean isRunning = true;
-	private JFrame frame = new JFrame("KTB");
 	private final JPanel panel = new JPanel();
 	private ArrayList<main.java.com.ktb.character.Character> characters = new ArrayList<>();
+	private List<JButton> buttons= new ArrayList<JButton>();
+	/**
+	 * 0 = playerturn
+	 * 1 = npc turn
+	 */
+	private int gamestate = 0;
+	
 	/**
 	 * This class starts the game and displays the images.
 	 * @param args
 	 */
 	public Game() {
 		panel.setLayout(null);
-	    frame.setContentPane(panel);
+	    this.add(panel);
 	    
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1200,600);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(1200,600);
         
         addCharacters();
         
         loadCharacterImages();
 		
 		gameLoop();
+	}
+	
+	public void setGameState(int newstate) {
+		gamestate = newstate;
+	}
+	
+	public int getGameState() {
+		return gamestate;
 	}
 	
 	private void loadCharacterImages() {
@@ -45,12 +65,23 @@ public class Game {
 			if(character.getPlayablecharacter()) {	
 				panel.add((character).getManaBarImage());
 				panel.add((character).getManaImage());	
+				int i = 0;
+				for (Skill skill: character.getSkills())
+				{
+				    JButton btn = new JButton(skill.getName());
+				    btn.setToolTipText(skill.getTooltipp());
+				    btn.addActionListener(this);
+				    btn.setBounds(100+i, 100, 100, 20);
+				    btn.setAlignmentX(100);
+				    btn.setAlignmentY(100);
+				    panel.add(btn);
+				    buttons.add(btn);
+				    i=i+110;
+				}
 			}
 			
-			panel.validate();
-	        frame.repaint();
-	        frame.setVisible(true);
 		}
+		paint();
 	}
 	
 	private void addCharacters() {
@@ -65,6 +96,13 @@ public class Game {
 	    timer = new Timer();
 	    timer.schedule(new LoopyStuff(), 0, 1000 / 30); //new timer at 60 fps, the timing mechanism
 	}
+	
+	private void paint() {
+		panel.validate();
+        this.repaint();
+        this.setVisible(true);
+	}
+
 
 	private class LoopyStuff extends java.util.TimerTask
 	{
@@ -83,15 +121,21 @@ public class Game {
 			}
 	    	
 	    	//render the game
-	    	panel.validate();
-	        frame.repaint();
-	        frame.setVisible(true);
+	    	paint();
+	    	
 	        if (!isRunning)
 	        {
 	            timer.cancel();
 	        }
 	        
 	    }
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

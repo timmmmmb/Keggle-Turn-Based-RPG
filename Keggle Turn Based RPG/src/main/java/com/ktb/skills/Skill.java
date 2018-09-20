@@ -27,7 +27,7 @@ public class Skill {
 	/**
 	 * This function is used when the skill is activated.
 	 */
-	public void activate() {
+	public void activate(main.java.com.ktb.character.Character target) {
 		
 	}
 	

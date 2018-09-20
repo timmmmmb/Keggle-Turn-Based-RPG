@@ -3,10 +3,14 @@ package main.java.com.ktb.character;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import main.java.com.ktb.skills.Skill;
 
 /**
  * This class is the base class of all characters. 
@@ -37,7 +41,7 @@ public class Character {
 	protected int defaultmana = 40;
 	protected Healthbar health = new Healthbar(defaulthealth+healthscaling*level); 
 	protected Manabar mana = new Manabar(defaultmana+manascaling*level);
-	
+	protected List<Skill> skills = new ArrayList<Skill>();
 	protected void initializeLabel() {
 
 		BufferedImage bigImg = null;
@@ -64,6 +68,10 @@ public class Character {
 	protected void scalecharacter() {
 		this.setMaxHealth(defaulthealth+healthscaling*level);
 		this.setMaxMana(defaultmana+manascaling*level);
+	}
+	
+	public int getLevel() {
+		return level;
 	}
 	
 	public void changeSpriteSheet(int prows,int pcols, String pimagefile,int pheight, int pwidth) {
@@ -103,7 +111,7 @@ public class Character {
 		health.regeneratehealth(regenerationrate);
 	}
 	
-	public void useHealth(int cost) {
+	public void loseHealth(int cost) {
 		health.losehealth(cost);
 	}
 	
@@ -178,5 +186,10 @@ public class Character {
 		posy = y;
 		picLabel.setBounds(posx, posy, picLabel.getPreferredSize().width, picLabel.getPreferredSize().height);
 		health.setPosition(posx+width/2-health.gethealthBarLabel().getPreferredSize().width/2, posy-health.gethealthBarLabel().getPreferredSize().height+10);
+	}
+
+	public List<Skill> getSkills() {
+		
+		return skills;
 	}
 }

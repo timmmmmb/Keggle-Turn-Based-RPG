@@ -1,5 +1,9 @@
 package main.java.com.ktb.character;
 
+import main.java.com.ktb.skills.EndTurn;
+import main.java.com.ktb.skills.Skill;
+import main.java.com.ktb.skills.Strike;
+
 public class Keggle extends Character {
 
 	public Keggle() {
@@ -33,6 +37,11 @@ public class Keggle extends Character {
 		this.manascaling = 10;
 		this.defaultmana = 40;
 		this.level = 1;
+		this.skills.clear();
+		Strike strike = new Strike();
+		EndTurn endturn = new EndTurn();
+		this.skills.add((Skill)strike);
+		this.skills.add((Skill)endturn);
 		scalecharacter();
 	}
 	

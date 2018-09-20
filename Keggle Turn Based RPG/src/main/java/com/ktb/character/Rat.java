@@ -27,7 +27,7 @@ public class Rat extends Character {
 		this.initializeLabel();
 		this.setPlayablecharacter(true);
 		this.setName("Keggle") ;
-		this.setPosition(100, 50);
+		this.setPosition(500, 50);
 		this.healthscaling = 5;
 		this.defaulthealth = 45;
 		this.manascaling = 10;
