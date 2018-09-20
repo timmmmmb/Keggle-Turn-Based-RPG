@@ -21,6 +21,7 @@ import main.java.com.ktb.skills.Skill;
 
 public class Character {
 	private String name = "";
+	private boolean targetedcharacter = false;
 	private boolean playablecharacter = false;
 	private boolean activecharacter = false;
 	private String imagefile = "images/keggle.png";
@@ -89,6 +90,14 @@ public class Character {
 	
 	public String getName() {
 		return this.name;
+	}
+	
+	public void setTargetedablecharacter(boolean target) {
+		targetedcharacter = target;
+	}
+	
+	public boolean getTargetedablecharacter() {
+		return targetedcharacter;
 	}
 	
 	public void setHealth(int phealth) {

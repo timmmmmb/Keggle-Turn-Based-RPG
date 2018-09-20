@@ -1,4 +1,7 @@
 package main.java.com.ktb.skills;
+
+import main.java.com.ktb.game.Game;
+
 /**
  * This class is the base class of all skills.
  * A skill is an ability that a character can use.
@@ -27,7 +30,7 @@ public class Skill {
 	/**
 	 * This function is used when the skill is activated.
 	 */
-	public void activate(main.java.com.ktb.character.Character target) {
+	public void activate(main.java.com.ktb.character.Character target, main.java.com.ktb.character.Character user, Game game) {
 		
 	}
 	

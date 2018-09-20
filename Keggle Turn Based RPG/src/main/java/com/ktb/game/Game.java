@@ -8,6 +8,7 @@ import java.util.Timer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import main.java.com.ktb.character.Keggle;
@@ -22,6 +23,7 @@ public class Game extends JFrame implements ActionListener{
 	private final JPanel panel = new JPanel();
 	private ArrayList<main.java.com.ktb.character.Character> characters = new ArrayList<>();
 	private List<JButton> buttons= new ArrayList<JButton>();
+	private JLabel label = new JLabel();
 	/**
 	 * 0 = playerturn
 	 * 1 = npc turn
@@ -56,6 +58,10 @@ public class Game extends JFrame implements ActionListener{
 	
 	private void loadCharacterImages() {
 		for(main.java.com.ktb.character.Character character:characters) {
+			label.setBounds(100, 150, 500, 40);
+			label.setAlignmentX(100);
+			label.setAlignmentY(100);
+			panel.add(label);
 			//add the character image
 			panel.add(character.getImage());
 			//add the characters health 
@@ -133,9 +139,26 @@ public class Game extends JFrame implements ActionListener{
 
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void actionPerformed (ActionEvent ae){
+        // Die Quelle wird mit getSource() abgefragt und mit den
+        // Buttons abgeglichen. Wenn die Quelle des ActionEvents einer
+        // der Buttons ist, wird der Text des JLabels entsprechend geändert
+        for(JButton button: this.buttons) {
+        	if(button == ae.getSource()) {
+        		for(main.java.com.ktb.character.Character character:characters) {
+        			if(character.getPlayablecharacter()) {
+        				for (Skill skill: character.getSkills()){
+        					if(skill.getName().equals(button.getText())) {
+        						for(main.java.com.ktb.character.Character target:characters) {
+        		        			if(target.getTargetedablecharacter()) {
+        		        				skill.activate(target, character, this);
+        		        			}	
+        						}	
+        					}
+        				}
+        			}
+        		}
+        	}
+        }
 	}
-	
 }

@@ -7,7 +7,6 @@ public class Rat extends Character {
 	}
 	
 	public Rat(int level) {
-		
 		initialize();
 		this.level = level;
 		scalecharacter();
@@ -33,6 +32,7 @@ public class Rat extends Character {
 		this.manascaling = 10;
 		this.defaultmana = 40;
 		this.level = 1;
+		setTargetedablecharacter(true);
 		scalecharacter();
 	}
 	
