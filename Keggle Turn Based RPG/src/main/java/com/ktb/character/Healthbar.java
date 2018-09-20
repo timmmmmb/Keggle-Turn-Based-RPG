@@ -41,6 +41,7 @@ public class Healthbar {
 	
 	protected void setmaxhealth(int newmaxhealth) {
 		maxhealth = newmaxhealth;
+		health = maxhealth;
 	}
 	
 	public void regeneratehealth(int regenerationrate) {

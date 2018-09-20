@@ -41,6 +41,7 @@ public class Manabar {
 	
 	protected void setmaxMana(int newmaxmana) {
 		maxmana = newmaxmana;
+		mana = maxmana;
 	}
 	
 	public void regeneratemana(int regenerationrate) {

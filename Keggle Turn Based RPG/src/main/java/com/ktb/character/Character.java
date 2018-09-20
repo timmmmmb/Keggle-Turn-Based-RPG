@@ -23,10 +23,11 @@ public class Character {
 	protected Manabar mana = new Manabar(100);
 	private String imagefile = "images/keggle.png";
 	protected JLabel picLabel = null;
-	final int width = 16;
-	final int height = 28;
-	final int rows = 3;
-	final int cols = 1;
+	int width = 16;
+	int height = 28;
+	int rows = 3;
+	int cols = 1;
+	protected int level = 1;
 	private int currentsprite = 0;
 	protected int posx = 42;
 	protected int posy = 10;
@@ -42,6 +43,7 @@ public class Character {
 		} catch (IOException e) {
 			System.out.println(e);
 		}
+		sprites = new BufferedImage[rows * cols];
 		//loads all sprites into the array
 		for (int i = 0; i < rows; i++)
 		{
@@ -55,6 +57,15 @@ public class Character {
 		picLabel.setBounds(posx, posy, picLabel.getPreferredSize().width, picLabel.getPreferredSize().height);
 	}
 	
+	public void changeSpriteSheet(int prows,int pcols, String pimagefile,int pheight, int pwidth) {
+		rows = prows;
+		cols = pcols;
+		height = pheight;
+		width = pwidth;
+		imagefile = pimagefile;
+		initializeLabel();
+	}
+	
 	public void setName(String pname) {
 		this.name=pname;
 	}
@@ -65,6 +76,14 @@ public class Character {
 	
 	public void setHealth(int phealth) {
 		this.health.sethealth(phealth);
+	}
+	
+	public void setMaxHealth(int phealth) {
+		this.health.setmaxhealth(phealth);
+	}
+	
+	public void setMaxMana(int pmana) {
+		this.mana.setmaxMana(pmana);
 	}
 	
 	public int getHealth() {

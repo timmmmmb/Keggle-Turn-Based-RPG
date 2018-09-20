@@ -8,6 +8,31 @@ public class Keggle extends Character {
 		this.setName("Keggle") ;
 		this.setPosition(100, 50);
 	}
+	public Keggle(int level) {
+		
+		this.classLoader =this.getClass().getClassLoader();
+		this.initializeLabel();
+		this.setPlayablecharacter(true);
+		this.setName("Keggle") ;
+		this.setPosition(100, 50);
+		
+		this.level = level;
+		this.setMaxHealth(45+5*level);
+		this.setMaxMana(40+10*level);
+	}
+	
+	public Keggle(int level, int x, int y) {
+		
+		this.classLoader =this.getClass().getClassLoader();
+		this.initializeLabel();
+		this.setPlayablecharacter(true);
+		this.setName("Keggle") ;
+		this.setPosition(x, y);
+		
+		this.level = level;
+		this.setMaxHealth(45+5*level);
+		this.setMaxMana(40+10*level);
+	}
 	
 	public void setPosition(int x, int y) {
 		posx = x;
