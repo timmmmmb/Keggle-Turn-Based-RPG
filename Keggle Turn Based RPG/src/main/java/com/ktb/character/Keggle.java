@@ -1,37 +1,39 @@
 package main.java.com.ktb.character;
 
 public class Keggle extends Character {
+
 	public Keggle() {
-		this.classLoader =this.getClass().getClassLoader();
-		this.initializeLabel();
-		this.setPlayablecharacter(true);
-		this.setName("Keggle") ;
-		this.setPosition(100, 50);
+		initialize();
 	}
+	
 	public Keggle(int level) {
 		
-		this.classLoader =this.getClass().getClassLoader();
-		this.initializeLabel();
-		this.setPlayablecharacter(true);
-		this.setName("Keggle") ;
-		this.setPosition(100, 50);
-		
+		initialize();
 		this.level = level;
-		this.setMaxHealth(45+5*level);
-		this.setMaxMana(40+10*level);
+		scalecharacter();
 	}
 	
 	public Keggle(int level, int x, int y) {
 		
+		initialize();
+		this.setPosition(x, y);
+		
+		this.level = level;
+		scalecharacter();
+	}
+	
+	private void initialize() {
 		this.classLoader =this.getClass().getClassLoader();
 		this.initializeLabel();
 		this.setPlayablecharacter(true);
 		this.setName("Keggle") ;
-		this.setPosition(x, y);
-		
-		this.level = level;
-		this.setMaxHealth(45+5*level);
-		this.setMaxMana(40+10*level);
+		this.setPosition(100, 50);
+		this.healthscaling = 5;
+		this.defaulthealth = 45;
+		this.manascaling = 10;
+		this.defaultmana = 40;
+		this.level = 1;
+		scalecharacter();
 	}
 	
 	public void setPosition(int x, int y) {

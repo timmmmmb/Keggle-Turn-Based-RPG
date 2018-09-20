@@ -19,8 +19,6 @@ public class Character {
 	private String name = "";
 	private boolean playablecharacter = false;
 	private boolean activecharacter = false;
-	protected Healthbar health = new Healthbar(100); 
-	protected Manabar mana = new Manabar(100);
 	private String imagefile = "images/keggle.png";
 	protected JLabel picLabel = null;
 	int width = 16;
@@ -33,6 +31,12 @@ public class Character {
 	protected int posy = 10;
 	protected ClassLoader classLoader = null;
 	private BufferedImage[] sprites = new BufferedImage[rows * cols];
+	protected int healthscaling = 5;
+	protected int defaulthealth = 45;
+	protected int manascaling = 10;
+	protected int defaultmana = 40;
+	protected Healthbar health = new Healthbar(defaulthealth+healthscaling*level); 
+	protected Manabar mana = new Manabar(defaultmana+manascaling*level);
 	
 	protected void initializeLabel() {
 
@@ -55,6 +59,11 @@ public class Character {
 		
 		picLabel = new JLabel(new ImageIcon(sprites[currentsprite]));
 		picLabel.setBounds(posx, posy, picLabel.getPreferredSize().width, picLabel.getPreferredSize().height);
+	}
+	
+	protected void scalecharacter() {
+		this.setMaxHealth(defaulthealth+healthscaling*level);
+		this.setMaxMana(defaultmana+manascaling*level);
 	}
 	
 	public void changeSpriteSheet(int prows,int pcols, String pimagefile,int pheight, int pwidth) {

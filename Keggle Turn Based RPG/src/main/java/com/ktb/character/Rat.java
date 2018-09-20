@@ -3,36 +3,37 @@ package main.java.com.ktb.character;
 //TODO: create a new Spritesheet for the rat and change it in the code
 public class Rat extends Character {
 	public Rat() {
-		this.classLoader =this.getClass().getClassLoader();
-		this.initializeLabel();
-		this.setPlayablecharacter(false);
-		this.setName("Rat") ;
-		this.setPosition(500, 50);
+		initialize();
 	}
 	
 	public Rat(int level) {
 		
-		this.classLoader =this.getClass().getClassLoader();
-		this.initializeLabel();
-		this.setPlayablecharacter(true);
-		this.setName("Rat") ;
-		this.setPosition(100, 50);
+		initialize();
 		this.level = level;
-		this.setMaxHealth(45+5*level);
-		this.setMaxMana(40+10*level);
+		scalecharacter();
 	}
 	
 	public Rat(int level, int x, int y) {
 		
-		this.classLoader =this.getClass().getClassLoader();
-		this.initializeLabel();
-		this.setPlayablecharacter(true);
-		this.setName("Rat") ;
+		initialize();
 		this.setPosition(x, y);
 		
 		this.level = level;
-		this.setMaxHealth(45+5*level);
-		this.setMaxMana(40+10*level);
+		scalecharacter();
+	}
+	
+	private void initialize() {
+		this.classLoader =this.getClass().getClassLoader();
+		this.initializeLabel();
+		this.setPlayablecharacter(true);
+		this.setName("Keggle") ;
+		this.setPosition(100, 50);
+		this.healthscaling = 5;
+		this.defaulthealth = 45;
+		this.manascaling = 10;
+		this.defaultmana = 40;
+		this.level = 1;
+		scalecharacter();
 	}
 	
 	public void setPosition(int x, int y) {
