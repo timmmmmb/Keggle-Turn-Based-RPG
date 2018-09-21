@@ -152,6 +152,7 @@ public class Game extends JFrame implements ActionListener{
         						for(main.java.com.ktb.character.Character target:characters) {
         		        			if(target.getTargetedablecharacter()) {
         		        				skill.activate(target, character, this);
+        		        				return;
         		        			}	
         						}	
         					}

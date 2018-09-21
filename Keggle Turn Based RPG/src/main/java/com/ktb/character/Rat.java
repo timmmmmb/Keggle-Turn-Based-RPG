@@ -1,6 +1,11 @@
 package main.java.com.ktb.character;
 
+import main.java.com.ktb.skills.EndTurn;
+import main.java.com.ktb.skills.Skill;
+import main.java.com.ktb.skills.Strike;
+
 //TODO: create a new Spritesheet for the rat and change it in the code
+//TODO: add an ai that does something
 public class Rat extends Character {
 	public Rat() {
 		initialize();
@@ -32,6 +37,10 @@ public class Rat extends Character {
 		this.manascaling = 10;
 		this.defaultmana = 40;
 		this.level = 1;
+		Strike strike = new Strike();
+		EndTurn endturn = new EndTurn();
+		this.skills.add((Skill)strike);
+		this.skills.add((Skill)endturn);
 		setTargetedablecharacter(true);
 		scalecharacter();
 	}
