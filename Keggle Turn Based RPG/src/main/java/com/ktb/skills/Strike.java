@@ -20,9 +20,8 @@ public class Strike extends Skill{
 				user.useMana(10);
 				if(game.getGameState()==0) {
 					game.setGameState(1);
-				}else if (game.getGameState()==1) {
-					game.setGameState(0);
 				}
+				System.out.println("The Character "+user.getName()+" used Strike on "+target.getName());
 			}
 			else {
 				System.out.println("you dont have enough mana");

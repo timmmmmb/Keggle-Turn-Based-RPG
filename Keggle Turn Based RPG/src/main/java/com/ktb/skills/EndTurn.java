@@ -13,9 +13,8 @@ public class EndTurn extends Skill{
 			user.regenerateMana(20);
 			if(game.getGameState()==0) {
 				game.setGameState(1);
-			}else if (game.getGameState()==1) {
-				game.setGameState(0);
 			}
+			System.out.println("The Character "+user.getName()+" used EndTurn");
 		}else {
 			System.out.println("its not your turn");
 		}

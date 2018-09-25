@@ -22,6 +22,7 @@ import main.java.com.ktb.skills.Skill;
 
 public class Character {
 	private String name = "";
+	private boolean alive = true;
 	private boolean targetedcharacter = false;
 	private boolean playablecharacter = false;
 	private boolean activecharacter = false;
@@ -122,7 +123,11 @@ public class Character {
 	}
 	
 	public void loseHealth(int cost) {
-		health.losehealth(cost);
+		if(health.gethealth()-cost<=0) {
+			alive = false;
+		}else {
+			health.losehealth(cost);
+		}
 	}
 	
 	public JLabel getHealthImage() {
@@ -207,5 +212,9 @@ public class Character {
 	 */
 	public void aiTurn(main.java.com.ktb.character.Character target, Game game) {
 		
+	}
+
+	public boolean getAlive() {
+		return alive;
 	}
 }

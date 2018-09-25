@@ -32,7 +32,7 @@ public class Rat extends Character {
 		this.classLoader =this.getClass().getClassLoader();
 		this.initializeLabel();
 		this.setPlayablecharacter(false);
-		this.setName("Keggle") ;
+		this.setName("Rat") ;
 		this.setPosition(500, 50);
 		this.healthscaling = 5;
 		this.defaulthealth = 45;
@@ -57,7 +57,6 @@ public class Rat extends Character {
 	 * This is the ki that executes a turn
 	 */
 	public void aiTurn(main.java.com.ktb.character.Character target, Game game) {
-		System.out.println("aiTurn");
 		endturn.activate(target, this, game);
 	}
 }

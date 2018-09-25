@@ -3,6 +3,7 @@ package main.java.com.ktb.game;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Timer;
 
@@ -95,6 +96,8 @@ public class Game extends JFrame implements ActionListener{
 		characters.add(player);
 		Rat rat = new Rat();
 		characters.add(rat);
+		Rat rat2 = new Rat(1,700,50);
+		characters.add(rat2);
 	}
 	
 	private void gameLoop()
@@ -116,11 +119,26 @@ public class Game extends JFrame implements ActionListener{
     				for(main.java.com.ktb.character.Character target:characters) {
             			if(target.getPlayablecharacter()) {
             					character.aiTurn(target,this);
+            					checkfordead();
             			}
     				}
     			}
     		}
+    		setGameState(0);
     	}
+	}
+	
+	private void checkfordead() {
+		for (Iterator<main.java.com.ktb.character.Character> iter = characters.listIterator(); iter.hasNext(); ) {
+			main.java.com.ktb.character.Character character = iter.next();
+		    if (!character.getAlive()) {
+		    	//removes all of the added images
+		    	panel.remove(character.getImage());
+		    	panel.remove((character).getHealthBarImage());
+				panel.remove((character).getHealthImage());
+		        iter.remove();
+		    }
+		}
 	}
 
 	private class LoopyStuff extends java.util.TimerTask
@@ -160,6 +178,7 @@ public class Game extends JFrame implements ActionListener{
         						for(main.java.com.ktb.character.Character target:characters) {
         		        			if(target.getTargetedablecharacter()) {
         		        				skill.activate(target, character, this);
+        		        				checkfordead();
         		        				return;
         		        			}	
         						}	
