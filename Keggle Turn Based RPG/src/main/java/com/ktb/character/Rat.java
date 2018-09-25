@@ -57,7 +57,13 @@ public class Rat extends Character {
 	 * This is the ki that executes a turn
 	 */
 	public void aiTurn(main.java.com.ktb.character.Character target, Game game) {
-		endturn.activate(target, this, game);
+		int  n = rand.nextInt(2);
+		if (n==1 && this.getMana()>=10) {
+			strike.activate(target, this, game);
+		}else {
+			endturn.activate(target, this, game);
+		}
+		
 	}
 }
  

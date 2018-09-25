@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 
 import main.java.com.ktb.game.Game;
 import main.java.com.ktb.skills.Skill;
-
+import java.util.Random;
 /**
  * This class is the base class of all characters. 
  * A character is the player and all enemies
@@ -21,6 +21,8 @@ import main.java.com.ktb.skills.Skill;
  */
 
 public class Character {
+
+	Random rand = new Random();
 	private String name = "";
 	private boolean alive = true;
 	private boolean targetedcharacter = false;
