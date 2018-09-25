@@ -125,7 +125,10 @@ public class Game extends JFrame implements ActionListener{
     				}
     			}
     		}
-    		setGameState(0);
+    		if(gamestate!=2) {
+    			setGameState(0);
+    		}
+    		
     	}
 	}
 	
@@ -139,7 +142,7 @@ public class Game extends JFrame implements ActionListener{
 				panel.remove((character).getHealthImage());
 				System.out.println("The Character " + character.getName() +" died");
 		        iter.remove();
-		    }else if(!character.getAlive()&&character.getPlayablecharacter()) {
+		    }else if(!character.getAlive()&&character.getPlayablecharacter()&&gamestate!=2) {
 		    	label.setText("Game Over you Lost");
 		    	gamestate = 2;
 		    	System.out.println("The Character " + character.getName() +" died");

@@ -1,6 +1,7 @@
 package main.java.com.ktb.character;
 
 import main.java.com.ktb.skills.EndTurn;
+import main.java.com.ktb.skills.Heal;
 import main.java.com.ktb.skills.Skill;
 import main.java.com.ktb.skills.Strike;
 
@@ -40,8 +41,10 @@ public class Keggle extends Character {
 		this.skills.clear();
 		Strike strike = new Strike();
 		EndTurn endturn = new EndTurn();
+		Heal heal = new Heal();
 		this.skills.add((Skill)strike);
 		this.skills.add((Skill)endturn);
+		this.skills.add((Skill)heal);
 		scalecharacter();
 	}
 	
