@@ -26,6 +26,8 @@ public class Strike extends Skill{
 			else {
 				System.out.println("you dont have enough mana");
 			}
+		}else if(game.getGameState()==2){
+			System.out.println("its game over");
 		}else {
 			System.out.println("its not your turn");
 		}

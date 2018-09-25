@@ -28,6 +28,7 @@ public class Game extends JFrame implements ActionListener{
 	/**
 	 * 0 = playerturn
 	 * 1 = npc turn
+	 * 2 = player lost
 	 */
 	private int gamestate = 0;
 	
@@ -131,12 +132,17 @@ public class Game extends JFrame implements ActionListener{
 	private void checkfordead() {
 		for (Iterator<main.java.com.ktb.character.Character> iter = characters.listIterator(); iter.hasNext(); ) {
 			main.java.com.ktb.character.Character character = iter.next();
-		    if (!character.getAlive()) {
+		    if (!character.getAlive()&&!character.getPlayablecharacter()) {
 		    	//removes all of the added images
 		    	panel.remove(character.getImage());
 		    	panel.remove((character).getHealthBarImage());
 				panel.remove((character).getHealthImage());
+				System.out.println("The Character " + character.getName() +" died");
 		        iter.remove();
+		    }else if(!character.getAlive()&&character.getPlayablecharacter()) {
+		    	label.setText("Game Over you Lost");
+		    	gamestate = 2;
+		    	System.out.println("The Character " + character.getName() +" died");
 		    }
 		}
 	}
