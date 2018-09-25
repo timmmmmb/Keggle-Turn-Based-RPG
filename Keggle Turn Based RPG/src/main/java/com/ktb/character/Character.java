@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import main.java.com.ktb.game.Game;
 import main.java.com.ktb.skills.Skill;
 
 /**
@@ -200,5 +201,11 @@ public class Character {
 	public List<Skill> getSkills() {
 		
 		return skills;
+	}
+	/**
+	 * This is the ki that executes a turn
+	 */
+	public void aiTurn(main.java.com.ktb.character.Character target, Game game) {
+		
 	}
 }

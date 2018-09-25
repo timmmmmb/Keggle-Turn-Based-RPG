@@ -109,6 +109,19 @@ public class Game extends JFrame implements ActionListener{
         this.setVisible(true);
 	}
 
+	private void executeAi() {
+		if(gamestate == 1) {
+    		for(main.java.com.ktb.character.Character character:characters) {
+    			if(!character.getPlayablecharacter()) {
+    				for(main.java.com.ktb.character.Character target:characters) {
+            			if(target.getPlayablecharacter()) {
+            					character.aiTurn(target,this);
+            			}
+    				}
+    			}
+    		}
+    	}
+	}
 
 	private class LoopyStuff extends java.util.TimerTask
 	{
@@ -117,14 +130,9 @@ public class Game extends JFrame implements ActionListener{
 	        //do game updates
 	    	for(main.java.com.ktb.character.Character character:characters) {				
 				character.animate();
-				/*if(character.getPlayablecharacter()) {
-					if(((Keggle) character).getMana()<1) {
-						((Keggle) character).regenerateMana(1);
-			    	}else {
-			    		((Keggle) character).useMana(1);
-			    	}
-				}*/
 			}
+	    	
+	    	executeAi();
 	    	
 	    	//render the game
 	    	paint();
