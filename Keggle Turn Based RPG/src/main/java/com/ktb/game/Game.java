@@ -1,5 +1,6 @@
 package main.java.com.ktb.game;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -21,10 +22,11 @@ public class Game extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private java.util.Timer timer;
 	private boolean isRunning = true;
-	private final JPanel panel = new JPanel();
+	private JPanel fightpanel = new JPanel();
 	private ArrayList<main.java.com.ktb.character.Character> characters = new ArrayList<>();
 	private List<JButton> buttons= new ArrayList<JButton>();
 	private JLabel label = new JLabel();
+	private JPanel menupanel = new JPanel();
 	/**
 	 * 0 = playerturn
 	 * 1 = npc turn
@@ -35,23 +37,64 @@ public class Game extends JFrame implements ActionListener{
 	
 	/**
 	 * This class starts the game and displays the images.
-	 * @param args
 	 */
 	public Game() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1200,600);
-        startfight(3);
+        startMenu();
+	}
+	/**
+	 * This Function adds the Startmenu
+	 */
+	private void startMenu() {
+		GridLayout grid = new GridLayout(3,1);
+		grid.setHgap(10);
+		grid.setVgap(10);
+		menupanel.setLayout(grid);
+		JButton buttonvs1 = new JButton();
+		JButton buttonvs2 = new JButton();
+		JButton buttonexit = new JButton();
+		buttonvs1.addActionListener(new java.awt.event.ActionListener() {
+            // Beim Drücken des Menüpunktes wird actionPerformed aufgerufen
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+            	startFight(1);
+            }});
+		buttonvs2.addActionListener(new java.awt.event.ActionListener() {
+            // Beim Drücken des Menüpunktes wird actionPerformed aufgerufen
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+            	startFight(2);
+            }});
+		buttonexit.addActionListener(new java.awt.event.ActionListener() {
+            // Beim Drücken des Menüpunktes wird actionPerformed aufgerufen
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+            	System.exit(0);
+            }});
+		buttonvs1.setText("Fight VS 1 Rat");
+		buttonvs2.setText("Fight VS 2 Rat");
+		buttonexit.setText("Exit");
+		menupanel.add(buttonvs1);
+		menupanel.add(buttonvs2);
+		menupanel.add(buttonexit);
+		this.add(menupanel);
+		paint();
 	}
 	
 	/**
 	 * This function creates the fight panel
 	 * @param amount is the amount of to be created monsters
 	 */
-	private void startfight(int amount) {
-		panel.setLayout(null);
-		this.add(panel);
+	private void startFight(int amount) {
+		removePanels();
+		fightpanel = new JPanel();
+		fightpanel.setLayout(null);
+		this.add(fightpanel);
 		addCharacters(amount);
 		gameLoop();
+	}
+	
+	private void removePanels() {
+		this.remove(fightpanel);
+		this.remove(menupanel);
 	}
 	
 	public void setGameState(int newstate) {
@@ -67,16 +110,16 @@ public class Game extends JFrame implements ActionListener{
 			label.setBounds(100, 150, 500, 40);
 			label.setAlignmentX(100);
 			label.setAlignmentY(100);
-			panel.add(label);
+			fightpanel.add(label);
 			//add the character image
-			panel.add(character.getImage());
+			fightpanel.add(character.getImage());
 			//add the characters health 
-			panel.add((character).getHealthBarImage());
-			panel.add((character).getHealthImage());
+			fightpanel.add((character).getHealthBarImage());
+			fightpanel.add((character).getHealthImage());
 			//add the characters manabar if its a playable character
 			if(character.getPlayablecharacter()) {	
-				panel.add((character).getManaBarImage());
-				panel.add((character).getManaImage());	
+				fightpanel.add((character).getManaBarImage());
+				fightpanel.add((character).getManaImage());	
 				int i = 0;
 				for (Skill skill: character.getSkills())
 				{
@@ -86,7 +129,7 @@ public class Game extends JFrame implements ActionListener{
 				    btn.setBounds(100+i, 100, 100, 20);
 				    btn.setAlignmentX(100);
 				    btn.setAlignmentY(100);
-				    panel.add(btn);
+				    fightpanel.add(btn);
 				    buttons.add(btn);
 				    i=i+110;
 				}
@@ -116,7 +159,7 @@ public class Game extends JFrame implements ActionListener{
 	}
 	
 	private void paint() {
-		panel.validate();
+		fightpanel.validate();
         this.repaint();
         this.setVisible(true);
 	}
@@ -145,9 +188,9 @@ public class Game extends JFrame implements ActionListener{
 			main.java.com.ktb.character.Character character = iter.next();
 		    if (!character.getAlive()&&!character.getPlayablecharacter()) {
 		    	//removes all of the added images
-		    	panel.remove(character.getImage());
-		    	panel.remove((character).getHealthBarImage());
-				panel.remove((character).getHealthImage());
+		    	fightpanel.remove(character.getImage());
+		    	fightpanel.remove((character).getHealthBarImage());
+				fightpanel.remove((character).getHealthImage());
 				System.out.println("The Character " + character.getName() +" died");
 		        iter.remove();
 		        if(characters.size()==1) {
