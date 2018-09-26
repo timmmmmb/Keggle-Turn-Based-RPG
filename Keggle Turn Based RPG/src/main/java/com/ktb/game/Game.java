@@ -3,6 +3,7 @@ package main.java.com.ktb.game;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,7 +12,11 @@ import java.util.Timer;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 import main.java.com.ktb.character.Keggle;
 import main.java.com.ktb.character.Rat;
@@ -27,6 +32,14 @@ public class Game extends JFrame implements ActionListener{
 	private List<JButton> buttons= new ArrayList<JButton>();
 	private JLabel label = new JLabel();
 	private JPanel menupanel = new JPanel();
+	private int maxenemy = 0;
+	
+	//Where the GUI is created:
+	private JMenuBar menuBar;
+	private JMenu menu;
+	private JMenuItem menuItem;
+
+
 	/**
 	 * 0 = playerturn
 	 * 1 = npc turn
@@ -41,12 +54,58 @@ public class Game extends JFrame implements ActionListener{
 	public Game() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1200,600);
+        
+      //Create the menu bar.
+        menuBar = new JMenuBar();
+
+        //Build the first menu.
+        menu = new JMenu("Menu");
+        menu.setMnemonic(KeyEvent.VK_A);
+        menu.getAccessibleContext().setAccessibleDescription("Menu");
+        menuBar.add(menu);
+
+        //a group of JMenuItems
+        menuItem = new JMenuItem("Startmenu",KeyEvent.VK_T);
+        menuItem.addActionListener(new java.awt.event.ActionListener() {
+            // Beim Drücken des Menüpunktes wird actionPerformed aufgerufen
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+            	removePanels();
+            	startMenu();
+            }});
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription("Return to the Startmenu");
+        menu.add(menuItem);
+        
+        menuItem = new JMenuItem("Restart",KeyEvent.VK_T);
+        menuItem.addActionListener(new java.awt.event.ActionListener() {
+            // Beim Drücken des Menüpunktes wird actionPerformed aufgerufen
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+            	if(maxenemy>0) {
+            		startFight(maxenemy);
+            	}
+            }});
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription("Restarts the current fight");
+        menu.add(menuItem);
+        
+        menuItem = new JMenuItem("Exit",KeyEvent.VK_T);
+        menuItem.addActionListener(new java.awt.event.ActionListener() {
+            // Beim Drücken des Menüpunktes wird actionPerformed aufgerufen
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+            	System.exit(0);
+            }});
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, ActionEvent.ALT_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription("Exits the Game");
+        menu.add(menuItem);
+        
+        this.setJMenuBar(menuBar);
         startMenu();
 	}
 	/**
 	 * This Function adds the Startmenu
 	 */
 	private void startMenu() {
+		menupanel = new JPanel();
 		GridLayout grid = new GridLayout(3,1);
 		grid.setHgap(10);
 		grid.setVgap(10);
@@ -84,11 +143,14 @@ public class Game extends JFrame implements ActionListener{
 	 * @param amount is the amount of to be created monsters
 	 */
 	private void startFight(int amount) {
+		maxenemy = amount;
 		removePanels();
 		fightpanel = new JPanel();
 		fightpanel.setLayout(null);
 		this.add(fightpanel);
 		addCharacters(amount);
+		gamestate = 0;
+		label.setText("");
 		gameLoop();
 	}
 	
@@ -144,6 +206,7 @@ public class Game extends JFrame implements ActionListener{
 	 * @param amount is the amount of to be created monsters
 	 */
 	private void addCharacters(int amount) {
+		characters = new ArrayList<>();
 		Keggle player = new Keggle();
 		characters.add(player);
 		for(int i = 1;i<=amount;i++) {
@@ -153,7 +216,10 @@ public class Game extends JFrame implements ActionListener{
 	}
 	
 	private void gameLoop()
-	{
+	{	
+		if(timer!=null) {
+			timer.cancel();
+		}
 	    timer = new Timer();
 	    timer.schedule(new LoopyStuff(), 0, 1000 / 30); //new timer at 60 fps, the timing mechanism
 	}
