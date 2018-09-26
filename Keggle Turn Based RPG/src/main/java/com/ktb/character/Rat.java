@@ -30,6 +30,7 @@ public class Rat extends Character {
 	
 	private void initialize() {
 		this.classLoader =this.getClass().getClassLoader();
+		this.setImage("images/rat.png");
 		this.initializeLabel();
 		this.setPlayablecharacter(false);
 		this.setName("Rat") ;

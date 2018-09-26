@@ -43,8 +43,8 @@ public class Keggle extends Character {
 		EndTurn endturn = new EndTurn();
 		Heal heal = new Heal();
 		this.skills.add((Skill)strike);
-		this.skills.add((Skill)endturn);
 		this.skills.add((Skill)heal);
+		this.skills.add((Skill)endturn);
 		scalecharacter();
 	}
 	
