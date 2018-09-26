@@ -38,16 +38,19 @@ public class Game extends JFrame implements ActionListener{
 	 * @param args
 	 */
 	public Game() {
-		panel.setLayout(null);
-	    this.add(panel);
-	    
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1200,600);
-        
-        addCharacters();
-        
-        loadCharacterImages();
-		
+        startfight(3);
+	}
+	
+	/**
+	 * This function creates the fight panel
+	 * @param amount is the amount of to be created monsters
+	 */
+	private void startfight(int amount) {
+		panel.setLayout(null);
+		this.add(panel);
+		addCharacters(amount);
 		gameLoop();
 	}
 	
@@ -93,13 +96,17 @@ public class Game extends JFrame implements ActionListener{
 		paint();
 	}
 	
-	private void addCharacters() {
+	/**
+	 * This Function adds all of the Characters
+	 * @param amount is the amount of to be created monsters
+	 */
+	private void addCharacters(int amount) {
 		Keggle player = new Keggle();
 		characters.add(player);
-		Rat rat = new Rat();
-		characters.add(rat);
-		//Rat rat2 = new Rat(1,700,50);
-		//characters.add(rat2);
+		for(int i = 1;i<=amount;i++) {
+			characters.add(new Rat(1,300+200*i,50));
+		}
+		loadCharacterImages();
 	}
 	
 	private void gameLoop()
@@ -176,7 +183,6 @@ public class Game extends JFrame implements ActionListener{
 	        
 	    }
 	}
-
 
 	@Override
 	public void actionPerformed (ActionEvent ae){
