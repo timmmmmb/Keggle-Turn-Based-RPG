@@ -29,6 +29,7 @@ public class Game extends JFrame implements ActionListener{
 	 * 0 = playerturn
 	 * 1 = npc turn
 	 * 2 = player lost
+	 * 3 = player won
 	 */
 	private int gamestate = 0;
 	
@@ -97,8 +98,8 @@ public class Game extends JFrame implements ActionListener{
 		characters.add(player);
 		Rat rat = new Rat();
 		characters.add(rat);
-		Rat rat2 = new Rat(1,700,50);
-		characters.add(rat2);
+		//Rat rat2 = new Rat(1,700,50);
+		//characters.add(rat2);
 	}
 	
 	private void gameLoop()
@@ -142,6 +143,10 @@ public class Game extends JFrame implements ActionListener{
 				panel.remove((character).getHealthImage());
 				System.out.println("The Character " + character.getName() +" died");
 		        iter.remove();
+		        if(characters.size()==1) {
+		        	label.setText("Game Over you Won");
+		        	gamestate = 3;
+		        }
 		    }else if(!character.getAlive()&&character.getPlayablecharacter()&&gamestate!=2) {
 		    	label.setText("Game Over you Lost");
 		    	gamestate = 2;
