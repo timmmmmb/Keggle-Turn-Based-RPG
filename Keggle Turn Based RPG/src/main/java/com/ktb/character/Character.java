@@ -1,7 +1,6 @@
 package main.java.com.ktb.character;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +51,7 @@ public class Character {
 		BufferedImage bigImg = null;
 		//loads the spritesheet
 		try {
-			bigImg = ImageIO.read(new File(classLoader.getResource(imagefile).getFile().toString().replaceAll("%20", " ")));
+			bigImg = ImageIO.read(classLoader.getResource(imagefile));
 		} catch (IOException e) {
 			System.out.println(e);
 		}

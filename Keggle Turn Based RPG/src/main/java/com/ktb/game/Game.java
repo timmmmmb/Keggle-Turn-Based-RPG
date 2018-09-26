@@ -1,6 +1,6 @@
 package main.java.com.ktb.game;
 
-import java.awt.GridLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -17,6 +17,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
+import javax.swing.SpringLayout;
 
 import main.java.com.ktb.character.Keggle;
 import main.java.com.ktb.character.Rat;
@@ -53,7 +54,7 @@ public class Game extends JFrame implements ActionListener{
 	 */
 	public Game() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(1200,600);
+        this.setSize(600,600);
         
       //Create the menu bar.
         menuBar = new JMenuBar();
@@ -105,14 +106,29 @@ public class Game extends JFrame implements ActionListener{
 	 * This Function adds the Startmenu
 	 */
 	private void startMenu() {
+		JLabel title = new JLabel();
+		title.setText("GAME");
+		title.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		menupanel = new JPanel();
-		GridLayout grid = new GridLayout(3,1);
-		grid.setHgap(10);
-		grid.setVgap(10);
-		menupanel.setLayout(grid);
+		menupanel.add(title);
+		SpringLayout layout = new SpringLayout();
+		menupanel.setLayout(layout);
 		JButton buttonvs1 = new JButton();
 		JButton buttonvs2 = new JButton();
 		JButton buttonexit = new JButton();
+		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, title, 0, SpringLayout.HORIZONTAL_CENTER, menupanel);
+		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, buttonvs1, 0, SpringLayout.HORIZONTAL_CENTER, menupanel);
+		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, buttonvs2, 0, SpringLayout.HORIZONTAL_CENTER, menupanel);
+		layout.putConstraint(SpringLayout.EAST, buttonexit, 0, SpringLayout.EAST, buttonvs1);
+		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, buttonexit, 0, SpringLayout.HORIZONTAL_CENTER, menupanel);
+
+		layout.putConstraint(SpringLayout.NORTH, title,50,SpringLayout.NORTH, menupanel);
+		layout.putConstraint(SpringLayout.VERTICAL_CENTER, buttonvs2,0,SpringLayout.VERTICAL_CENTER, menupanel);
+		layout.putConstraint(SpringLayout.NORTH, buttonvs1,-100,SpringLayout.NORTH, buttonvs2);
+		layout.putConstraint(SpringLayout.NORTH, buttonexit,100,SpringLayout.NORTH, buttonvs2);
+		buttonvs1.setSize(200, 50);
+		buttonvs2.setSize(200, 50);
+		buttonexit.setSize(200, 50);
 		buttonvs1.addActionListener(new java.awt.event.ActionListener() {
             // Beim Drücken des Menüpunktes wird actionPerformed aufgerufen
             public void actionPerformed(java.awt.event.ActionEvent e) {

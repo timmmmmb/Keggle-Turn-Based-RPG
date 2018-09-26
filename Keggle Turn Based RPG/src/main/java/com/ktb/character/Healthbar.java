@@ -1,7 +1,6 @@
 package main.java.com.ktb.character;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -22,8 +21,8 @@ public class Healthbar {
 		this.classLoader =this.getClass().getClassLoader();
 		
 		try {
-			healthbarimg = ImageIO.read(new File(classLoader.getResource("images/bar.png").getFile().toString().replaceAll("%20", " ")));
-			healthimg = ImageIO.read(new File(classLoader.getResource("images/health.png").getFile().toString().replaceAll("%20", " ")));
+			healthbarimg = ImageIO.read(classLoader.getResource("images/bar.png"));
+			healthimg = ImageIO.read(classLoader.getResource("images/health.png"));
 		} catch (IOException e) {
 			System.out.println(e);
 		}
