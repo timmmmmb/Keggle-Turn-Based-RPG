@@ -17,10 +17,13 @@ public class Heal extends Skill{
 			}
 			System.out.println("The Character "+user.getName()+" used Heal");
 		}else if(game.getGameState()==2){
+			game.label.setText("its game over");
 			System.out.println("its game over");
 		}else if(user.getMana()<20){
 			System.out.println("you dont have enough mana");
+			game.label.setText("you dont have enough mana");
 		}else {
+			game.label.setText("its not your turn");
 			System.out.println("its not your turn");
 		}
 		

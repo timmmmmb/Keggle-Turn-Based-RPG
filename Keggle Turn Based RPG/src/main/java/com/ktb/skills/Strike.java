@@ -24,11 +24,14 @@ public class Strike extends Skill{
 				System.out.println("The Character "+user.getName()+" used Strike on "+target.getName());
 			}
 			else {
+				game.label.setText("you dont have enough mana");
 				System.out.println("you dont have enough mana");
 			}
 		}else if(game.getGameState()==2){
+			game.label.setText("its game over");
 			System.out.println("its game over");
 		}else {
+			game.label.setText("its not your turn");
 			System.out.println("its not your turn");
 		}
 	}

@@ -16,9 +16,11 @@ public class EndTurn extends Skill{
 			}
 			System.out.println("The Character "+user.getName()+" used EndTurn");
 		}else if(game.getGameState()==2){
+			game.label.setText("its game over");
 			System.out.println("its game over");
 		}else {
 			System.out.println("its not your turn");
+			game.label.setText("its not your turn");
 		}
 		
 	}

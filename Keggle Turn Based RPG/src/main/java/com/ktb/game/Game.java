@@ -30,7 +30,7 @@ public class Game extends JFrame implements ActionListener{
 	private JPanel fightpanel = new JPanel();
 	private ArrayList<main.java.com.ktb.character.Character> characters = new ArrayList<>();
 	private List<JButton> buttons= new ArrayList<JButton>();
-	private JLabel label = new JLabel();
+	public JLabel label = new JLabel();
 	private JPanel menupanel = new JPanel();
 	private int maxenemy = 0;
 	
@@ -306,6 +306,7 @@ public class Game extends JFrame implements ActionListener{
         					if(skill.getName().equals(button.getText())) {
         						for(main.java.com.ktb.character.Character target:characters) {
         		        			if(target.getTargetedablecharacter()) {
+        		        				label.setText("");
         		        				skill.activate(target, character, this);
         		        				checkfordead();
         		        				return;
